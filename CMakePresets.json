@@ -1,0 +1,44 @@
+{
+  "version": 2,
+  "configurePresets": [
+    {
+      "name": "main",
+      "generator": "Visual Studio 16 2019",
+      "toolset": "host=x64",
+      "binaryDir": "${sourceDir}/.cmake_configs/${presetName}",
+      "cacheVariables": {
+        "CMAKE_C_COMPILER": "cl.exe",
+        "CMAKE_CXX_COMPILER": "cl.exe",
+        "PRESET_NAME": "${presetName}"
+      },
+      "hidden": true
+    },
+    {
+      "name": "arm64",
+      "architecture": "arm64",
+      "inherits": "main",
+      "cacheVariables": {
+        "QT_PATH": "C:/Qt/6.3.1/msvc2019_arm64"
+      }
+    },
+    {
+      "name": "arm64ec",
+      "architecture": {
+        "value": "arm64ec",
+        "strategy": "set"
+      },
+      "inherits": "main",
+      "cacheVariables": {
+        "QT_PATH": "C:/Qt/6.3.1/msvc2019_64"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "main",
+      "configurePreset": "arm64ec",
+      "configuration": "Release",
+      "targets": ["cxx_app"]
+    }
+  ]
+}
